@@ -1,0 +1,3 @@
+[submodule "smge"]
+	path = smge
+	url = https://github.com/secretisdead/smge
