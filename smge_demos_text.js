@@ -269,6 +269,7 @@ export class DemoText extends Scene {
 					)
 				) {
 					this.smge.g.demos.unhighlight_menu(this.menus[this.lorem_ipsum.effect]);
+					this.smge.g.demos.highlight_menu(menu);
 					this.lorem_ipsum.effect = menu_name;
 					change = true;
 				}
