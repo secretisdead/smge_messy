@@ -26,7 +26,7 @@ export class DemoParticles extends Scene {
 			}
 		);
 		this.current_menu = null;
-		this.current_intensity = 0.01;
+		this.current_intensity = 0.5;
 		this.current_direction = 1.57;
 	}
 	load() {
