@@ -9,7 +9,8 @@ import { Overlay } from './smge/game_objects/overlay.js';
 import { Sprite } from './smge/modules/sprite.js';
 import { Text } from './smge/game_objects/text.js';
 import { Bound } from './smge/bound_manager.js';
-import { PrecipitationEmitter } from './weather.js';
+import { RainEmitter, SnowEmitter } from './weather.js';
+import { ParticleEmitter } from './smge/game_objects/particle_emitter.js';
 
 export class DemoParticles extends Scene {
 	constructor(smge) {
@@ -61,20 +62,23 @@ export class DemoParticles extends Scene {
 		// create emitter menus
 		let emitters = {
 			'none': null,
-			'rain': new PrecipitationEmitter(
+			'rain': new RainEmitter(
 				this.smge,
+				this.smge.screen.width * 2,
+				this.smge.screen.height * 2,
+				0.05, // min freq
+				20, // max freq
 				this.current_intensity,
-				this.current_direction,
-				'rain',
-				2,
-				2
+				this.current_direction
 			),
-			'snow': new PrecipitationEmitter(
+			'snow': new SnowEmitter(
 				this.smge,
+				this.smge.screen.width * 2,
+				this.smge.screen.height * 2,
+				0.5, // min freq
+				50, // max freq
 				this.current_intensity,
-				this.current_direction,
-				'snow',
-				2
+				this.current_direction
 			),
 //			'fireflies': null,
 //			'fire': null,
@@ -126,6 +130,11 @@ export class DemoParticles extends Scene {
 			);
 			this.add_module(menu);
 		}
+		// set up emitter positions
+		let weather_emitter_y = -1 * this.smge.screen.height;
+		emitters['rain'].transform.y = weather_emitter_y;
+		emitters['snow'].transform.y = weather_emitter_y;
+		//emitters['fire'].transform.y = -66;
 
 		// set initially selected emitter menu
 		this.smge.g.demos.highlight_menu(this.menus['none']);
@@ -213,8 +222,8 @@ export class DemoParticles extends Scene {
 			for (let menu_name in this.menus) {
 				let menu = this.menus[menu_name];
 				if (menu.emitter) {
-					menu.emitter.set_intensity(this.current_intensity);
-					console.log('set emitter for ' + menu_name + ' to ' + menu.emitter.intensity);
+					menu.emitter.intensity = this.current_intensity;
+					menu.emitter.refresh_properties();
 				}
 			}
 			this.smge.g.demos.set_indicator_string(this.current_intensity, this.intensity_instructions);
@@ -232,8 +241,8 @@ export class DemoParticles extends Scene {
 			for (let menu_name in this.menus) {
 				let menu = this.menus[menu_name];
 				if (menu.emitter) {
-					menu.emitter.set_direction(this.current_direction);
-					console.log('set direction for ' + menu_name + ' to ' + menu.emitter.direction);
+					menu.emitter.direction = this.current_direction;
+					menu.emitter.refresh_properties();
 				}
 			}
 			this.smge.g.demos.set_indicator_string(this.current_direction, this.direction_instructions);
