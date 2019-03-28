@@ -213,10 +213,10 @@ export class DemoParticles extends Scene {
 		// intensity change
 		let last_intensity = this.current_intensity;
 		if (this.smge.input.down('ArrowUp')) {
-			this.current_intensity += 0.05;
+			this.current_intensity += 0.01;
 		}
 		if (this.smge.input.down('ArrowDown')) {
-			this.current_intensity -= 0.05;
+			this.current_intensity -= 0.01;
 		}
 		if (this.current_intensity != last_intensity) {
 			for (let menu_name in this.menus) {
@@ -232,10 +232,10 @@ export class DemoParticles extends Scene {
 		// direction change
 		let last_direction = this.current_direction;
 		if (this.smge.input.down('ArrowLeft')) {
-			this.current_direction += 0.05;
+			this.current_direction += 0.01;
 		}
 		if (this.smge.input.down('ArrowRight')) {
-			this.current_direction -= 0.05;
+			this.current_direction -= 0.01;
 		}
 		if (this.current_direction != last_direction) {
 			for (let menu_name in this.menus) {
