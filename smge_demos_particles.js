@@ -220,6 +220,12 @@ export class DemoParticles extends Scene {
 			this.current_intensity -= 0.01;
 		}
 		if (this.current_intensity != last_intensity) {
+			if (0 > this.current_intensity) {
+				this.current_intensity = 0;
+			}
+			if (1 < this.current_intensity) {
+				this.current_intensity = 1;
+			}
 			for (let menu_name in this.menus) {
 				let menu = this.menus[menu_name];
 				if (menu.emitter) {
