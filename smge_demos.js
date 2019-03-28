@@ -7,6 +7,7 @@ import { SpriteFont } from './smge/standalone/sprite_font.js';
 import { SpringCameraCursor } from './spring_camera_cursor.js';
 import { Text } from './smge/game_objects/text.js';
 import { Bound } from './smge/bound_manager.js';
+import { Pauser } from './smge/game_objects/pauser.js';
 import { DemoMainMenu } from './smge_demos_main_menu.js';
 
 // the main smge demos game object
@@ -28,6 +29,7 @@ export class Demos extends Scene {
 		);
 		// store this game object somewhere so we can call on its methods from other scenes
 		this.smge.g.demos = this;
+		this.pauser = null;
 		this.current_scene = null;
 		this.menu_text_color = '#808080';
 		this.menu_text_intensity = 1;
@@ -64,6 +66,8 @@ export class Demos extends Scene {
 		});
 	}
 	compose() {
+		this.pauser = new Pauser(this.smge, this.smge.timescales.default, 500);
+		this.smge.entity_manager.add(this.pauser);
 		//TODO set up menu select and highlight sounds since loading is finished
 		this.menu_select_sound = this.smge.resource_manager.resources['lockdrop_click'];
 		//TODO this.menu_highlight_sound = this.smge.resource_manager.resources['menu_highlick_click'];
@@ -136,6 +140,11 @@ export class Demos extends Scene {
 	}
 	input_update() {
 		super.input_update();
+
+		// pauser
+		if (this.smge.input.pressed('p')) {
+			this.pauser.toggle();
+		}
 
 		// ensure cursor and cursor bounds are loaded before doing the rest of input update
 		if (!this.cursor || !this.cursor.bounds) {
