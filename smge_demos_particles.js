@@ -109,6 +109,7 @@ export class DemoParticles extends Scene {
 			menu.emitter = emitters[menu_name];
 			if (menu.emitter) {
 				this.add_module(menu.emitter);
+				menu.emitter.name = menu_name;
 			}
 			this.menus[menu_name] = menu;
 		}
