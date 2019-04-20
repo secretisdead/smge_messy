@@ -58,7 +58,7 @@ export class DemoMainMenu extends Scene {
 		let menus = {
 			'text': DemoText,
 			'particles': DemoParticles,
-			'character': DemoCharacter,
+			//'character': DemoCharacter,
 			'secret': null,
 		};
 		this.menus = {};
