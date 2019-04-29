@@ -31,5 +31,15 @@ export class SpringCameraCursor extends Cursor {
 		this.camera.add_module(new Shaker());
 		this.camera.add_module(new Autofocus());
 		this.add_module(this.camera);
+
+		this.transform.parallax.x = 0;
+		this.transform.parallax.y = 0;
+		this.camera.transform.parallax.x = 0;
+		this.camera.transform.parallax.y = 0;
+	}
+	input_update() {
+		super.input_update();
+		this.transform.x = this.smge.input.cursor.screen.x;
+		this.transform.y = this.smge.input.cursor.screen.y;
 	}
 }
