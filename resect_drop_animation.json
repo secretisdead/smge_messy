@@ -1,0 +1,95 @@
+{
+	"frames": [
+		{
+			"sx": 0,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 500
+		},
+		{
+			"sx": 16,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 20
+		},
+		{
+			"sx": 32,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 20
+		},
+		{
+			"sx": 48,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 20,
+			"events": ["click"]
+		},
+		{
+			"sx": 64,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 150
+		},
+		{
+			"sx": 80,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 20,
+			"events": ["click", "buzz"]
+		},
+		{
+			"sx": 96,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 20
+		},
+		{
+			"sx": 112,
+			"sy": 0,
+			"width": 16,
+			"height": 16,
+			"origin": {
+				"x": 8,
+				"y": 8
+			},
+			"duration": 1000,
+			"events": ["red"]
+		}
+	]
+}
