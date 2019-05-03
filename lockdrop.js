@@ -68,9 +68,20 @@ export class Lockdrop extends GameObject {
 			if (!this.target_scene) {
 				return;
 			}
+			// ensure lockdrop is on a high layer (at least above default scene cover layer)
+			this.change_layer(4096);
 			// transition to target scene with removal of lockdrop
 			this.smge.entity_manager.add(this.target_scene);
-			this.target_scene.transition(this, true);
+			this.target_scene.transition(
+				null,
+				false,
+				{
+					composed: ()=> {
+						console.log('lockdrop target scene composed, removing lockdrop');
+						this.smge.entity_manager.remove(this);
+					},
+				}
+			);
 		});
 	}
 	set_scale() {
