@@ -63,21 +63,28 @@ export class Lockdrop extends GameObject {
 		// add to smge
 		this.add_module(this.lock);
 
+		if (this.target_scene) {
+			// store target scene cover color
+			this.target_scene_color = this.target_scene.cover.color;
+			// change target scene cover color to transparent
+			this.target_scene.cover.change_color('#00000000');
+			this.smge.entity_manager.add(this.target_scene);
+		}
+
 		// play
 		this.lock.animator.play(1, () => {
 			if (!this.target_scene) {
 				return;
 			}
-			// ensure lockdrop is on a high layer (at least above default scene cover layer)
-			this.change_layer(4096);
 			// transition to target scene with removal of lockdrop
-			this.smge.entity_manager.add(this.target_scene);
 			this.target_scene.transition(
 				null,
 				false,
 				{
 					composed: ()=> {
 						console.log('lockdrop target scene composed, removing lockdrop');
+						// restore target scene cover color
+						this.target_scene.cover.change_color(this.target_scene_color || this.color);
 						this.smge.entity_manager.remove(this);
 					},
 				}
