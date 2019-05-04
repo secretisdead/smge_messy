@@ -9,7 +9,7 @@ import { Transform } from './smge/modules/transform.js';
 import { Shaker } from './smge/modules/shaker.js';
 
 export class SpringCameraCursor extends Cursor {
-	constructor(smge, weight) {
+	constructor(smge, weight, world) {
 		super(smge);
 
 		this.name = 'cursor';
@@ -32,13 +32,21 @@ export class SpringCameraCursor extends Cursor {
 		this.camera.add_module(new Autofocus());
 		this.add_module(this.camera);
 
-		this.transform.parallax.x = 0;
-		this.transform.parallax.y = 0;
-		this.camera.transform.parallax.x = 0;
-		this.camera.transform.parallax.y = 0;
+		this.world = world || false;
+		if (!this.world) {
+			this.transform.parallax.x = 0;
+			this.transform.parallax.y = 0;
+			this.camera.transform.parallax.x = 0;
+			this.camera.transform.parallax.y = 0;
+		}
 	}
 	input_update() {
 		super.input_update();
+		if (this.world) {
+			this.transform.x = this.smge.input.cursor.world.x;
+			this.transform.y = this.smge.input.cursor.world.y;
+			return;
+		}
 		this.transform.x = this.smge.input.cursor.screen.x;
 		this.transform.y = this.smge.input.cursor.screen.y;
 	}
