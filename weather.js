@@ -130,7 +130,7 @@ export class Droplet extends Particle {
 		this.lifetime -= this.timescale.delta;
 		if (0 >= this.lifetime) {
 			// remove emitter that created this droplet
-			this.smge.entity_manager.remove(this.parent.parent);
+			this.parent.parent.parent.remove_module(this.parent.parent);
 		}
 	}
 }
